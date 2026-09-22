@@ -31,6 +31,14 @@
   box-sizing: border-box;
 }
 
+.receipt-area {
+  display: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
 body {
   font-family: var(--font-family);
   background-color: var(--main-bg);
@@ -282,6 +290,14 @@ body {
 
 .data-table tbody tr:nth-child(even) {
   background-color: #f9fafc; /* Slightly different for readability */
+}
+
+.data-table .loading-cell {
+  padding: 28px 15px;
+  color: var(--color-secondary);
+  text-align: center;
+  font-size: 0.9rem;
+  font-style: italic;
 }
 
 .data-table tbody tr:hover {
@@ -568,12 +584,18 @@ select:focus {
 
 .form-actions {
   grid-column: 1 / -1; /* Span across all columns */
-  text-align: right;
   margin-top: 10px; /* Add some space above buttons */
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .form-actions button {
-  margin-left: 10px;
+  margin: 0;
+}
+
+#btn-cancel {
+  display: none;
 }
 
 .search-input-table {
@@ -703,6 +725,7 @@ select:focus {
 }
 
 #cart-table-wrapper {
+  display: none;
   background-color: var(--card-bg);
   padding: 25px;
   border-radius: 8px;
@@ -711,6 +734,7 @@ select:focus {
 }
 
 .cart-summary {
+  display: none;
   background-color: var(--card-bg);
   padding: 25px;
   border-radius: 8px;
@@ -745,6 +769,10 @@ select:focus {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.discount-label {
+  color: var(--color-secondary);
 }
 
 .summary-item .discount-input input {
@@ -816,6 +844,10 @@ select:focus {
     min-width: 180px; /* Minimum width before wrapping */
 }
 
+#print-receipt-button {
+  display: none;
+}
+
 /* History Page Specific */
 .table-responsive {
   overflow-x: auto;
@@ -832,6 +864,7 @@ select:focus {
   height: 100%;
   overflow: auto;
   background-color: rgba(0,0,0,0.5);
+  -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   padding-top: 60px; /* Spacing from top */
 }
@@ -989,17 +1022,11 @@ select:focus {
       grid-template-columns: 1fr; /* Stack form fields */
   }
   .form-actions {
-      text-align: center;
+      justify-content: center;
   }
   .form-actions button {
-      margin: 5px 0;
-      width: calc(50% - 5px); /* Two buttons side-by-side */
-  }
-  .form-actions button:first-child {
-      margin-right: 5px;
-  }
-  .form-actions button:last-child {
-      margin-left: 5px;
+      flex: 1;
+      width: auto;
   }
   .cart-actions .btn {
       flex: none; /* Disable flex grow */

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="icon-Yudapos.png" />
   <title>Yuda POS — Aplikasi Kasir</title>
 
   <link rel="stylesheet" href="sederhana.css" />
@@ -190,7 +191,7 @@
 
             <div class="form-actions">
               <button type="submit" class="btn btn-success">Simpan Produk</button>
-              <button type="button" id="btn-cancel" class="btn btn-secondary" style="display:none;">Batal</button>
+              <button type="button" id="btn-cancel" class="btn btn-secondary">Batal</button>
             </div>
           </form>
         </div>
@@ -213,9 +214,9 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody id="product-table-body">
+              <tbody id="product-table-body" aria-live="polite">
                 <!-- Data produk dimuat di sini oleh JS -->
-                <tr><td colspan="5" style="text-align:center;">Memuat data...</td></tr>
+                <tr class="loading-row"><td colspan="5" class="loading-cell">Memuat data...</td></tr>
               </tbody>
             </table>
           </div>
@@ -266,7 +267,7 @@
             Keranjang masih kosong. Ayo tambahkan beberapa produk!
           </div>
 
-          <div class="table-responsive" id="cart-table-wrapper" style="display: none;">
+          <div class="table-responsive" id="cart-table-wrapper">
             <table class="data-table">
               <thead>
                 <tr>
@@ -277,22 +278,22 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody id="cart-table-body">
+              <tbody id="cart-table-body" aria-live="polite">
                 <!-- Item keranjang dimuat di sini -->
               </tbody>
             </table>
           </div>
 
-          <div id="cart-summary" class="cart-summary" style="display: none;">
+          <div id="cart-summary" class="cart-summary" aria-live="polite">
             <div class="summary-item">
               <span>Subtotal</span>
               <strong id="cart-subtotal">Rp 0</strong>
             </div>
             <div class="summary-item">
-              <span>Diskon (%)</span>
+              <label class="discount-label" for="cart-discount">Diskon (%)</label>
               <div class="discount-input">
-                <input id="cart-discount" type="number" min="0" max="100" value="0" />
-                <span id="cart-discount-amount">Rp 0</span>
+                <input id="cart-discount" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" aria-describedby="cart-discount-amount" />
+                <span id="cart-discount-amount" role="status" aria-live="polite">Rp 0</span>
               </div>
             </div>
             <div class="summary-item">
@@ -320,13 +321,13 @@
 
             <div class="cart-actions">
               <button id="checkout-button" class="btn btn-success btn-block">Proses Checkout</button>
-              <button id="print-receipt-button" class="btn btn-secondary btn-block" style="display: none;">Cetak Struk</button>
+              <button id="print-receipt-button" class="btn btn-secondary btn-block">Cetak Struk</button>
               <button id="clear-cart-button" class="btn btn-danger btn-block">Kosongkan Keranjang</button>
             </div>
           </div>
         </div>
 
-        <div id="area-cetak-struk" style="display:none;"></div>
+        <div id="area-cetak-struk" class="receipt-area" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -350,7 +351,7 @@
                 </tr>
               </thead>
               <tbody id="riwayatBody">
-                <tr><td colspan="4" style="text-align:center;">Memuat riwayat...</td></tr>
+                <tr><td colspan="4" class="text-center">Memuat riwayat...</td></tr>
               </tbody>
             </table>
           </div>
